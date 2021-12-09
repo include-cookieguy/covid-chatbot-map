@@ -2,6 +2,7 @@ import requests
 from flask import Flask, render_template
 import geocoder
 import os
+
 myloc = geocoder.ip('me')
 
 URL = "https://discover.search.hereapi.com/v1/discover"
