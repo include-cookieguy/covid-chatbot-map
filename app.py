@@ -1,8 +1,12 @@
 import requests
 from flask import Flask, render_template
+import geocoder
+import os
+myloc = geocoder.ip('me')
+
 URL = "https://discover.search.hereapi.com/v1/discover"
-latitude = 21.2749
-longitude = 106.1933
+latitude = myloc.latlng[0]
+longitude = myloc.latlng[1]
 # Acquire from developer.here.com
 api_key = 'Ax3DtY2b-3EWyh1do9xI2d8tpRq5-gmPIA4D-Mm0d8M'
 query = 'hospital'
@@ -81,3 +85,5 @@ def map_func():
 
 if __name__ == '__main__':
     app.run(debug=False)
+    port = int(os.environ.get('PORT', 33507))
+    waitress.serve(app, port=port)
